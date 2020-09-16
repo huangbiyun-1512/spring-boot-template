@@ -1,9 +1,9 @@
 package com.maersk.wnd.component.aspect;
 
-import com.common.poc.components.dto.BaseErrorDto;
-import com.common.poc.components.dto.BaseResponseDto;
-import com.common.poc.components.exception.BusinessException;
-import com.common.poc.components.util.ErrorUtil;
+import com.maersk.commons.component.dto.BaseErrorDto;
+import com.maersk.commons.component.dto.BaseResponseDto;
+import com.maersk.commons.component.exception.BusinessException;
+import com.maersk.commons.component.util.ErrorUtil;
 import com.maersk.wnd.component.constant.MessageConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

@@ -45,8 +45,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>poc-components</artifactId>
+			<groupId>com.maersk.wnd</groupId>
+			<artifactId>wnd-commons-component</artifactId>
 		</dependency>
 		<!-- Internal Dependency END -->
 

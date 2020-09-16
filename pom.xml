@@ -31,7 +31,7 @@
         <mssql.jdbc.version>8.4.0.jre11</mssql.jdbc.version>
         <springdoc.openapi.ui.version>1.4.3</springdoc.openapi.ui.version>
         <logstash.logback.encoder.version>6.2</logstash.logback.encoder.version>
-        <poc.components.version>1.0.1-RELEASE</poc.components.version>
+        <wnd.commons.component.version>1.0.1-RELEASE</wnd.commons.component.version>
         <spring.cloud.starter.openfeign.version>2.2.4.RELEASE</spring.cloud.starter.openfeign.version>
         <spring.cloud.starter.kubernetes.version>1.1.5.RELEASE</spring.cloud.starter.kubernetes.version>
         <spring.cloud.starter.kubernetes.config.version>1.1.5.RELEASE</spring.cloud.starter.kubernetes.config.version>
@@ -68,9 +68,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>poc-components</artifactId>
-                <version>${poc.components.version}</version>
+                <groupId>com.maersk.wnd</groupId>
+                <artifactId>wnd-commons-component</artifactId>
+                <version>${wnd.commons.component.version}</version>
             </dependency>
             <!-- Internal Dependency END -->
 

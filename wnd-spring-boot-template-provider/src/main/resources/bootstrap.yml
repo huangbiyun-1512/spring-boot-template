@@ -1,0 +1,17 @@
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: 'prometheus'
+spring:
+  application:
+    name: wnd-spring-boot-template-provider
+  cloud:
+    kubernetes:
+      config:
+        enabled: false
+#        sources:
+#          - name: poc-domain-config
+#            namespace: default
+logging:
+  config: classpath:logback-spring.xml

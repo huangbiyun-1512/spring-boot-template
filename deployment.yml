@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wnd-spring-boot-template
+  namespace: default
+data:
+  application.yml: |-
+    spring:
+      profiles: development
+      messages:
+        basename: static/i18n/messages
+    server:
+      port: 18080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wnd-spring-boot-template
+  namespace: default
+  labels:
+    app: wnd-spring-boot-template
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wnd-spring-boot-template
+  template:
+    metadata:
+      labels:
+        app: wnd-spring-boot-template
+    spec:
+      serviceAccountName: config-reader
+#      imagePullSecrets:
+#        - name: regcred
+      containers:
+        - name: wnd-spring-boot-template
+#          image: 192.168.99.1:8083/poc-domain
+          image: huangbiyun1512/poc-domain
+          command: ["java"]
+          args: ["-Dfile.encoding=UTF-8", "-jar", "app.jar", "--spring.profiles.active=development"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wnd-spring-boot-template
+  namespace: default
+spec:
+  ports:
+    - protocol: TCP
+      port: 18080
+      targetPort: 18080
+  selector:
+    app: wnd-spring-boot-template
+  type: ClusterIP

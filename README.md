@@ -1,1 +1,1 @@
-# spring-boot-template
+# wnd-spring-boot-template

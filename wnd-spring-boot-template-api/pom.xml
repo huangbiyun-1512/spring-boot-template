@@ -21,6 +21,20 @@
 		</dependency>
 		<!-- Spring Boot Starter END -->
 
+		<!-- Spring Cloud Starter START -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!-- Spring Cloud Starter END -->
+
+		<!-- Internal Dependency START -->
+		<dependency>
+			<groupId>com.maersk.wnd</groupId>
+			<artifactId>wnd-commons-component</artifactId>
+		</dependency>
+		<!-- External Dependency END -->
+
 		<!-- External Dependency START -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

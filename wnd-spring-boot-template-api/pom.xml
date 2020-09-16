@@ -21,13 +21,6 @@
 		</dependency>
 		<!-- Spring Boot Starter END -->
 
-		<!-- Spring Cloud Starter START -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-kubernetes</artifactId>
-		</dependency>
-		<!-- Spring Cloud Starter END -->
-
 		<!-- External Dependency START -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

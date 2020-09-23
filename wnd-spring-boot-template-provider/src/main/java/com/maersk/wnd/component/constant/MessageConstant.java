@@ -1,5 +1,8 @@
 package com.maersk.wnd.component.constant;
 
+/**
+ * Message key for i18n.
+ */
 public class MessageConstant {
 
   public static final String MESSAGE_KEY_I01_0001 = "I01-0001";

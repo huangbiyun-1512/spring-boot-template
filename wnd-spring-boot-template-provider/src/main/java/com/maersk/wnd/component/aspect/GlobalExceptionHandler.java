@@ -24,6 +24,10 @@ import java.util.concurrent.TimeoutException;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Global exception handler is a common component for handling kinds of exception
+ * and build standard error output as API response.
+ */
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -34,12 +38,22 @@ public class GlobalExceptionHandler {
     this.errorUtil = errorUtil;
   }
 
+  /**
+   * handle BusinessException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(BusinessException.class)
   public ResponseEntity handleBusinessException(BusinessException e) {
     log.error("BusinessException: ", e);
     return buildResponseEntity(e.getErrors());
   }
 
+  /**
+   * handle MethodArgumentNotValidException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity handleValidationException(MethodArgumentNotValidException e) {
     log.error("MethodArgumentNotValidException: ", e);
@@ -53,6 +67,11 @@ public class GlobalExceptionHandler {
     return buildResponseEntity(errors);
   }
 
+  /**
+   * handle MethodArgumentTypeMismatchException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(MethodArgumentTypeMismatchException.class)
   public ResponseEntity handleMismatchException(MethodArgumentTypeMismatchException e) {
     log.error("MethodArgumentTypeMismatchException: ", e);
@@ -61,6 +80,11 @@ public class GlobalExceptionHandler {
             MessageConstant.MESSAGE_KEY_E01_0003, e.getMessage()));
   }
 
+  /**
+   * handle HttpClientErrorException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(HttpClientErrorException.class)
   public ResponseEntity handleHttpClientErrorException(HttpClientErrorException e) {
     log.error("HttpClientErrorException: ", e);
@@ -69,6 +93,11 @@ public class GlobalExceptionHandler {
             MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
   }
 
+  /**
+   * handle HttpServerErrorException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(HttpServerErrorException.class)
   public ResponseEntity handleHttpServerErrorException(HttpServerErrorException e) {
     log.error("HttpServerErrorException: ", e);
@@ -77,6 +106,11 @@ public class GlobalExceptionHandler {
             MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
   }
 
+  /**
+   * handle ResourceAccessException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(ResourceAccessException.class)
   public ResponseEntity handleResourceAccessException(ResourceAccessException e) {
     log.error("ResourceAccessException: ", e);
@@ -85,6 +119,11 @@ public class GlobalExceptionHandler {
             MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
   }
 
+  /**
+   * handle TimeoutException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(TimeoutException.class)
   public ResponseEntity handleTimeoutException(TimeoutException e) {
     log.error("TimeoutException: ", e);
@@ -93,12 +132,22 @@ public class GlobalExceptionHandler {
             MessageConstant.MESSAGE_KEY_E01_0002, e.getMessage()));
   }
 
+  /**
+   * handle ExecutionException
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(ExecutionException.class)
   public ResponseEntity handleExecutionException(ExecutionException e) {
     log.error("ExecutionException: ", e);
     return handleKindsOfException(e);
   }
 
+  /**
+   * handle Exception
+   * @param e
+   * @return ResponseEntity
+   */
   @ExceptionHandler(Exception.class)
   public ResponseEntity handleException(Exception e) {
     log.error("Exception: ", e);

@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
             .map(x -> errorUtil.buildError(
                 HttpStatus.BAD_REQUEST.value(),
                 MessageConstant.MESSAGE_KEY_E01_0003,
-                new Object[]{x.getField()}))
+                x.toString()))
             .collect(toList());
     return buildResponseEntity(errors);
   }

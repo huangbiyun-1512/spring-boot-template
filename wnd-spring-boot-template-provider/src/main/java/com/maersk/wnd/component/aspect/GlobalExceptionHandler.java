@@ -17,6 +17,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -50,6 +51,24 @@ public class GlobalExceptionHandler {
   }
 
   /**
+   * handle ConstraintViolationException
+   * @param e
+   * @return ResponseEntity
+   */
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity handleConstraintViolationException(ConstraintViolationException e) {
+    log.error("ConstraintViolationException: ", e);
+    List<BaseErrorDto> errors =
+        e.getConstraintViolations().stream()
+            .map(x -> errorUtil.buildError(
+                HttpStatus.BAD_REQUEST.value(),
+                MessageConstant.MESSAGE_KEY_E01_01_0003,
+                x.toString()))
+            .collect(toList());
+    return buildResponseEntity(errors);
+  }
+
+  /**
    * handle MethodArgumentNotValidException
    * @param e
    * @return ResponseEntity
@@ -61,7 +80,7 @@ public class GlobalExceptionHandler {
         e.getBindingResult().getFieldErrors().stream()
             .map(x -> errorUtil.buildError(
                 HttpStatus.BAD_REQUEST.value(),
-                MessageConstant.MESSAGE_KEY_E01_0003,
+                MessageConstant.MESSAGE_KEY_E01_01_0003,
                 x.toString()))
             .collect(toList());
     return buildResponseEntity(errors);
@@ -77,7 +96,7 @@ public class GlobalExceptionHandler {
     log.error("MethodArgumentTypeMismatchException: ", e);
     return buildResponseEntity(
         errorUtil.build400ErrorList(
-            MessageConstant.MESSAGE_KEY_E01_0003, e.getMessage()));
+            MessageConstant.MESSAGE_KEY_E01_01_0003, e.getMessage()));
   }
 
   /**
@@ -90,7 +109,7 @@ public class GlobalExceptionHandler {
     log.error("HttpClientErrorException: ", e);
     return buildResponseEntity(
         errorUtil.build400ErrorList(
-            MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
+            MessageConstant.MESSAGE_KEY_E01_01_0001, e.getMessage()));
   }
 
   /**
@@ -103,7 +122,7 @@ public class GlobalExceptionHandler {
     log.error("HttpServerErrorException: ", e);
     return buildResponseEntity(
         errorUtil.build500ErrorList(
-            MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
+            MessageConstant.MESSAGE_KEY_E01_01_0001, e.getMessage()));
   }
 
   /**
@@ -116,7 +135,7 @@ public class GlobalExceptionHandler {
     log.error("ResourceAccessException: ", e);
     return buildResponseEntity(
         errorUtil.build500ErrorList(
-            MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
+            MessageConstant.MESSAGE_KEY_E01_01_0001, e.getMessage()));
   }
 
   /**
@@ -129,7 +148,7 @@ public class GlobalExceptionHandler {
     log.error("TimeoutException: ", e);
     return buildResponseEntity(
         errorUtil.build408ErrorList(
-            MessageConstant.MESSAGE_KEY_E01_0002, e.getMessage()));
+            MessageConstant.MESSAGE_KEY_E01_01_0002, e.getMessage()));
   }
 
   /**
@@ -153,7 +172,7 @@ public class GlobalExceptionHandler {
     log.error("Exception: ", e);
     return buildResponseEntity(
         errorUtil.build500ErrorList(
-            MessageConstant.MESSAGE_KEY_E01_0001, e.getMessage()));
+            MessageConstant.MESSAGE_KEY_E01_01_0001, e.getMessage()));
   }
 
   private ResponseEntity buildResponseEntity(Iterable<? extends BaseErrorDto> errors) {
